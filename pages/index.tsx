@@ -4,6 +4,6 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <p>안녕</p>
+    <p>안녕 .env 파일 gitignore에 추가</p>
   )
 }
