@@ -1,28 +1,43 @@
+import { API_ENDPOINTS } from "@/constants/constant";
+import { API } from "@/constants/env";
 import React from "react";
+import useSWR from "swr";
 
+const ARTICLE_API = `${API}${API_ENDPOINTS.ARTICLE.ROOT}`;
 const ArticlePreview = () => {
+  const { data, error, isLoading } = useSWR(ARTICLE_API);
+
+  console.log(data);
   return (
-    <div className="article-preview">
-      <div className="article-meta">
-        <a href="profile.html">
-          <img src="http://i.imgur.com/Qr71crq.jpg" />
-        </a>
-        <div className="info">
-          <a href="" className="author">
-            Eric Simons
-          </a>
-          <span className="date">January 20th</span>
-        </div>
-        <button className="btn btn-outline-primary btn-sm pull-xs-right">
-          <i className="ion-heart"></i> 29
-        </button>
-      </div>
-      <a href="" className="preview-link">
-        <h1>How to build webapps that scale</h1>
-        <p>This is the description for the post.</p>
-        <span>Read more...</span>
-      </a>
-    </div>
+    <>
+      <ul>
+        {data.articles.map((item) => (
+          <>
+            <div className="article-preview">
+              <div className="article-meta">
+                <a href="profile.html">
+                  <img src={item.author.image} />
+                </a>
+                <div className="info">
+                  <a href="" className="author">
+                    {item.author.username}
+                  </a>
+                  <span className="date">{item.createdAt}</span>
+                </div>
+                <button className="btn btn-outline-primary btn-sm pull-xs-right">
+                  <i className="ion-heart"></i> {item.favoritesCount}
+                </button>
+              </div>
+              <a href="" className="preview-link">
+                <h1>{item.title}</h1>
+                <p>{item.description}</p>
+                <span>Read more...</span>
+              </a>
+            </div>
+          </>
+        ))}
+      </ul>
+    </>
   );
 };
 
