@@ -1,9 +1,29 @@
+import { Banner, ArticlePreview, TagList, FeedToggle } from "@/components/home";
 import { API } from "../constants/env";
 
 const Home = () => {
-  console.log(API);
+  return (
+    <div className="home-page">
+      <Banner />
 
-  return <p>안녕 .env 파일 gitignore에 추가</p>;
+      <div className="container page">
+        <div className="row">
+          <div className="col-md-9">
+            <FeedToggle />
+
+            <ArticlePreview />
+          </div>
+
+          <div className="col-md-3">
+            <div className="sidebar">
+              <p>Popular Tags</p>
+              <TagList />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Home;

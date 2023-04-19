@@ -18,6 +18,7 @@ export const API_ENDPOINTS = {
         FEED: 'articles/feed',
 
         COMMENT: {
+
             ROOT: (slug: string | number) => `articles/${slug}/comments`, // Get Comments From an Article
             DELETE: (slug: string | number, id: string | number) => `articles/${slug}/comments/${id}`,
 
