@@ -1,32 +1,31 @@
+import { API_ENDPOINTS } from "@/constants/constant";
+import { API } from "@/constants/env";
 import React from "react";
+import useSWR from "swr";
+
+const TAG_API = `${API}${API_ENDPOINTS.TAGS.ROOT}`;
 
 const TagList = () => {
+  const { data } = useSWR(TAG_API);
+
+  const clickTagButton = () => {
+    console.log("버튼클릭");
+  };
+
   return (
     <div className="tag-list">
-      <a href="" className="tag-pill tag-default">
-        programming
-      </a>
-      <a href="" className="tag-pill tag-default">
-        javascript
-      </a>
-      <a href="" className="tag-pill tag-default">
-        emberjs
-      </a>
-      <a href="" className="tag-pill tag-default">
-        angularjs
-      </a>
-      <a href="" className="tag-pill tag-default">
-        react
-      </a>
-      <a href="" className="tag-pill tag-default">
-        mean
-      </a>
-      <a href="" className="tag-pill tag-default">
-        node
-      </a>
-      <a href="" className="tag-pill tag-default">
-        rails
-      </a>
+      {data.tags.map((tag) => (
+        <button
+          onClick={clickTagButton}
+          style={{
+            border: "0px",
+          }}
+          key={tag}
+          className="tag-pill tag-default"
+        >
+          {tag}
+        </button>
+      ))}
     </div>
   );
 };
