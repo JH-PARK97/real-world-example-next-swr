@@ -1,18 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import { API_ENDPOINTS } from "@/constants/constant";
-import { API } from "@/constants/env";
-import React from "react";
+import Pagination from "@/components/common/Pagination";
+import React, { useState } from "react";
 import useSWR from "swr";
 
-const ARTICLE_API = `${API}${API_ENDPOINTS.ARTICLE.ROOT}`;
+const ArticlePreview = ({ ARTICLE_API, articlesData }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const LIMIT = 10;
 
-const ArticlePreview = () => {
-  const { data } = useSWR(ARTICLE_API);
+  const { data } = useSWR([ARTICLE_API, currentPage], async () => {
+    const response = await fetch(`${ARTICLE_API}/?offset=${(currentPage - 1) * 10}`);
+    const result = response.json();
+    return result;
+  });
 
+  const clickPageButton = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <>
       <ul>
-        {data.articles.map((item) => (
+        {data?.articles?.map((item) => (
           <div key={item.slug} className="article-preview">
             <div className="article-meta">
               <a href="profile.html">
@@ -22,7 +29,7 @@ const ArticlePreview = () => {
                 <a href="" className="author">
                   {item.author.username}
                 </a>
-                <span className="date">{item.createdAt}</span>
+                <span className="date">{new Date(item.createdAt).toLocaleString()}</span>
               </div>
               <button className="btn btn-outline-primary btn-sm pull-xs-right">
                 <i className="ion-heart"></i> {item.favoritesCount}
@@ -36,6 +43,7 @@ const ArticlePreview = () => {
           </div>
         ))}
       </ul>
+      <Pagination limit={LIMIT} articlesCount={data?.articlesCount} clickPageButton={clickPageButton} />
     </>
   );
 };

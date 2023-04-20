@@ -1,11 +1,7 @@
-import { API_ENDPOINTS } from "@/constants/constant";
-import { API } from "@/constants/env";
 import React from "react";
 import useSWR from "swr";
 
-const TAG_API = `${API}${API_ENDPOINTS.TAGS.ROOT}`;
-
-const TagList = () => {
+const TagList = ({ TAG_API }) => {
   const { data } = useSWR(TAG_API);
 
   const clickTagButton = () => {

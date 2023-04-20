@@ -1,21 +1,27 @@
-import { API_ENDPOINTS } from "@/constants/constant";
-import { API } from "@/constants/env";
-import React, { useState } from "react";
-import useSWR from "swr";
+import React from "react";
 
-const Pagination = () => {
-  const [pageIndex, setPageIndex] = useState(0);
-  const { data } = useSWR(`${API}${API_ENDPOINTS.ARTICLE.ROOT}/?offset=${pageIndex}`);
+const Pagination = ({ limit, articlesCount, clickPageButton }) => {
+  const pageNumbers = [];
 
-  console.log(data);
+  for (let i = 1; i <= Math.ceil(articlesCount / limit); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
-    <div>
-      {data.map((item) => (
-        <div key={item.id}>{item.name}</div>
+    <ul className="pagination">
+      {pageNumbers.map((number) => (
+        <li key={number} className="page-item">
+          <button
+            className={"page-link"}
+            onClick={() => {
+              clickPageButton(number);
+            }}
+          >
+            {number}
+          </button>
+        </li>
       ))}
-      <button onClick={() => setPageIndex(pageIndex - 1)}>Previous</button>
-      <button onClick={() => setPageIndex(pageIndex + 1)}>Next</button>
-    </div>
+    </ul>
   );
 };
 
