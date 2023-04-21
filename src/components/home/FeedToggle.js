@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const FeedToggle = () => {
@@ -5,14 +6,10 @@ const FeedToggle = () => {
     <div className="feed-toggle">
       <ul className="nav nav-pills outline-active">
         <li className="nav-item">
-          <a className="nav-link " href="">
-            Your Feed
-          </a>
+          <button className="nav-link ">Your Feed</button>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="">
-            Global Feed
-          </a>
+          <button className="nav-link active">Global Feed</button>
         </li>
       </ul>
     </div>

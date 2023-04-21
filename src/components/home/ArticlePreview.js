@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Pagination from "@/components/common/Pagination";
 import { PAGE_ENDPOINTS } from "@/constants/constant";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
@@ -37,24 +38,24 @@ const ArticlePreview = ({ ARTICLE_API }) => {
         {data?.articles?.map((item) => (
           <div key={item.slug} className="article-preview">
             <div className="article-meta">
-              <a href="profile.html">
+              <Link href={PAGE_ENDPOINTS.PROFILE}>
                 <img alt="profile-image" src={item.author.image} />
-              </a>
+              </Link>
               <div className="info">
-                <a href="" className="author">
+                <Link href="" className="author">
                   {item.author.username}
-                </a>
+                </Link>
                 <span className="date">{new Date(item.createdAt).toLocaleString()}</span>
               </div>
               <button className="btn btn-outline-primary btn-sm pull-xs-right">
                 <i className="ion-heart"></i> {item.favoritesCount}
               </button>
             </div>
-            <a href="" className="preview-link">
+            <Link href="" className="preview-link">
               <h1>{item.title}</h1>
               <p>{item.description}</p>
               <span>Read more...</span>
-            </a>
+            </Link>
           </div>
         ))}
       </ul>

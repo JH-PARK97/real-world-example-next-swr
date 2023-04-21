@@ -50,10 +50,10 @@ export const PAGE_ENDPOINTS = {
         LOGIN: '/login',
         REGIS: '/register',
     },
-    EDITOR: '/editor/:slug?',
+    EDITOR: '/editor',
     SETTINGS: "/settings",
-    PROFILE: "/profile/:username",
-    ARTICLE: "/article/:slug",
+    PROFILE: "/profile",
+    ARTICLE: "/article",
 
 
 }
