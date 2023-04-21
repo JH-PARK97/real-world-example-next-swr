@@ -18,6 +18,7 @@ export const API_ENDPOINTS = {
         FEED: 'articles/feed',
 
         COMMENT: {
+
             ROOT: (slug: string | number) => `articles/${slug}/comments`, // Get Comments From an Article
             DELETE: (slug: string | number, id: string | number) => `articles/${slug}/comments/${id}`,
 
@@ -49,10 +50,10 @@ export const PAGE_ENDPOINTS = {
         LOGIN: '/login',
         REGIS: '/register',
     },
-    EDITOR: '/editor/:slug?',
+    EDITOR: '/editor',
     SETTINGS: "/settings",
-    PROFILE: "/profile/:username",
-    ARTICLE: "/article/:slug",
+    PROFILE: "/profile",
+    ARTICLE: "/article",
 
 
 }
