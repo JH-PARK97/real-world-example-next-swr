@@ -1,20 +1,35 @@
 /* eslint-disable @next/next/no-img-element */
 import Pagination from "@/components/common/Pagination";
-import React, { useState } from "react";
+import { PAGE_ENDPOINTS } from "@/constants/constant";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 
-const ArticlePreview = ({ ARTICLE_API, articlesData }) => {
+const ArticlePreview = ({ ARTICLE_API }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const router = useRouter();
   const LIMIT = 10;
 
   const { data } = useSWR([ARTICLE_API, currentPage], async () => {
-    const response = await fetch(`${ARTICLE_API}/?offset=${(currentPage - 1) * 10}`);
+    const response = await fetch(`${ARTICLE_API}/?offset=${(currentPage - 1) * LIMIT}`);
     const result = response.json();
     return result;
   });
 
+  useEffect(() => {
+    if (router.query.pageNo) {
+      setCurrentPage(router.query.pageNo);
+    } else {
+      setCurrentPage(1);
+    }
+  }, [router.query]);
+
   const clickPageButton = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    const offset = (pageNumber - 1) * LIMIT;
+    router.push({
+      pathname: PAGE_ENDPOINTS.ROOT,
+      query: { pageNo: pageNumber, offset: offset },
+    });
   };
   return (
     <>

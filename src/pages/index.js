@@ -14,7 +14,6 @@ export async function getServerSideProps(context) {
   const tagData = await fetcher(TAG_API);
   return {
     props: {
-      articlesData,
       fallback: {
         [unstable_serialize([ARTICLE_API, currentPage])]: articlesData,
 
@@ -24,7 +23,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-const Home = ({ fallback, articlesData }) => {
+const Home = ({ fallback }) => {
   return (
     <>
       <SWRConfig value={{ fallback, fetcher }}>
@@ -39,7 +38,7 @@ const Home = ({ fallback, articlesData }) => {
               <div className="col-md-9">
                 <FeedToggle />
 
-                <ArticlePreview ARTICLE_API={ARTICLE_API} articlesData={articlesData} />
+                <ArticlePreview ARTICLE_API={ARTICLE_API} />
               </div>
 
               <div className="col-md-3">
