@@ -1,8 +1,13 @@
+import { API_URL } from "@/constants/API";
 import React from "react";
 import useSWR from "swr";
 
-const TagList = ({ TAG_API }) => {
-  const { data } = useSWR(TAG_API);
+const TagList = () => {
+  const { data, isLoading } = useSWR(API_URL.TAG_API);
+
+  if (isLoading) {
+    return <p>Loading. . </p>;
+  }
 
   const clickTagButton = () => {
     console.log("버튼클릭");
@@ -10,7 +15,7 @@ const TagList = ({ TAG_API }) => {
 
   return (
     <div className="tag-list">
-      {data.tags.map((tag) => (
+      {data?.tags.map((tag) => (
         <button
           onClick={clickTagButton}
           style={{

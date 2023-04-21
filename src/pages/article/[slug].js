@@ -1,9 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 
+
+
 const Article = () => {
+  const router = useRouter();
+
+
+  console.log(router.query);
   return (
     <div>
       <div className="article-page">

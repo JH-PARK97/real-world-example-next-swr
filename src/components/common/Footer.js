@@ -1,3 +1,4 @@
+import { PAGE_ENDPOINTS } from "@/constants/constant";
 import Link from "next/link";
 import React from "react";
 
@@ -5,7 +6,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="container">
-        <Link href="/" className="logo-font">
+        <Link href={PAGE_ENDPOINTS.ROOT} className="logo-font">
           conduit
         </Link>
         <span className="attribution">
