@@ -1,106 +1,45 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
+import { ArticleAction, ArticleBanner, ArticleContainer, CommentCard, PostCommentForm } from "@/components/article";
+import { API_URL } from "@/constants/API";
+import { fetcher } from "src/utills/fetcher";
 
+/**
+ *
+ * @param {import('next').GetServerSidePropsContext} context
+ * @returns
+ */
+export async function getServerSideProps(context) {
+  const slug = context.query.slug?.toString();
+  const articleDetail = await fetcher(`${API_URL.ARTICLE.DETAIL(slug)}`);
+  return {
+    props: {
+      articleDetail,
+    },
+  };
+}
 
+const Article = ({ articleDetail }) => {
+  const { article } = articleDetail;
 
-const Article = () => {
-  const router = useRouter();
-
-
-  console.log(router.query);
   return (
     <div>
       <div className="article-page">
-        <div className="banner">
-          <div className="container">
-            <h1>How to build webapps that scale</h1>
-
-            <div className="article-meta">
-              <Link href="">
-                <img src="http://i.imgur.com/Qr71crq.jpg" />
-              </Link>
-              <div className="info">
-                <Link href="" className="author">
-                  Eric Simons
-                </Link>
-                <span className="date">January 20th</span>
-              </div>
-              <button className="btn btn-sm btn-outline-secondary">
-                <i className="ion-plus-round"></i>
-                &nbsp; Follow Eric Simons <span className="counter">(10)</span>
-              </button>
-              &nbsp;&nbsp;
-              <button className="btn btn-sm btn-outline-primary">
-                <i className="ion-heart"></i>
-                &nbsp; Favorite Post <span className="counter">(29)</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <ArticleBanner articleDetail={article} />
 
         <div className="container page">
-          <div className="row article-content">
-            <div className="col-md-12">
-              <p>Web development technologies have evolved at an incredible clip over the past few years.</p>
-              <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-              <p> great solution for learning how other frameworks work.</p>
-            </div>
-          </div>
+          <ArticleContainer articleDetail={article} />
 
           <hr />
 
           <div className="article-actions">
-            <div className="article-meta">
-              <Link href="profile.html">
-                <img src="http://i.imgur.com/Qr71crq.jpg" />
-              </Link>
-              <div className="info">
-                <Link href="" className="author">
-                  Eric Simons
-                </Link>
-                <span className="date">January 20th</span>
-              </div>
-              <button className="btn btn-sm btn-outline-secondary">
-                <i className="ion-plus-round"></i>
-                &nbsp; Follow Eric Simons
-              </button>
-              &nbsp;
-              <button className="btn btn-sm btn-outline-primary">
-                <i className="ion-heart"></i>
-                &nbsp; Favorite Post <span className="counter">(29)</span>
-              </button>
-            </div>
+            <ArticleAction articleDetail={article} />
           </div>
 
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">
-              <form className="card comment-form">
-                <div className="card-block">
-                  <textarea className="form-control" placeholder="Write a comment..." rows="3"></textarea>
-                </div>
-                <div className="card-footer">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" />
-                  <button className="btn btn-sm btn-primary">Post Comment</button>
-                </div>
-              </form>
+              <PostCommentForm articleDetail={article} />
 
               <div className="card">
-                <div className="card-block">
-                  <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-                <div className="card-footer">
-                  <Link href="" className="comment-author">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" className="comment-author-img" />
-                  </Link>
-                  &nbsp;
-                  <Link href="" className="comment-author">
-                    Jacob Schmidt
-                  </Link>
-                  <span className="date-posted">Dec 29th</span>
-                </div>
+                <CommentCard articleDetail={article} />
               </div>
             </div>
           </div>

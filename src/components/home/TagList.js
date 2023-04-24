@@ -3,7 +3,7 @@ import React from "react";
 import useSWR from "swr";
 
 const TagList = () => {
-  const { data, isLoading } = useSWR(API_URL.TAG_API);
+  const { data, isLoading } = useSWR(API_URL.TAG.ROOT);
 
   if (isLoading) {
     return <p>Loading. . </p>;
