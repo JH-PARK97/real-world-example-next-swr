@@ -4,8 +4,7 @@ import { API_URL } from "@/constants/API";
 import { PAGE_ENDPOINTS } from "@/constants/constant";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useMemo, useState } from "react";
-import { ARTICLE_API } from "src/pages";
+import React, { useMemo } from "react";
 import useSWR, { useSWRConfig } from "swr";
 
 const ArticlePreview = () => {
@@ -21,9 +20,10 @@ const ArticlePreview = () => {
   }, [router.query]);
 
   const { data, isLoading } = useSWR(
-    [API_URL.ARTICLE_API, pageNo],
+    [API_URL.ARTICLE.ROOT, pageNo],
     async (key) => {
       const [url, page] = key;
+
       const response = await fetch(`${url}/?offset=${(page - 1) * LIMIT}`);
       const result = response.json();
       return result;
