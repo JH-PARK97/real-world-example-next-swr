@@ -4,7 +4,6 @@ import { API_URL } from "@/constants/API";
 import { PAGE_ENDPOINTS } from "@/constants/constant";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
 import { fetcher } from "src/utills/fetcher";
 import useSWR from "swr";
 
