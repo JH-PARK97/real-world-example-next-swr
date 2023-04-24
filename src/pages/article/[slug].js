@@ -36,10 +36,10 @@ const Article = ({ articleDetail }) => {
 
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">
-              <PostCommentForm articleDetail={article} />
+              <PostCommentForm />
 
               <div className="card">
-                <CommentCard articleDetail={article} />
+                <CommentCard />
               </div>
             </div>
           </div>

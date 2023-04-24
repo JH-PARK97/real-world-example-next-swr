@@ -1,5 +1,4 @@
 const FollowButton = ({ following, username }) => {
-    console.log(following)
   return (
     <>
       {/* Follow = false : btn-outline-secondary
