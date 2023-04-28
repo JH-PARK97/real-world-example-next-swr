@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { PAGE_ENDPOINTS } from "@/constants/constant";
@@ -28,7 +29,7 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {login && clientRendered && (
+          {login && clientRendered ? (
             <>
               <li className="nav-item">
                 <Link className={router.pathname === PAGE_ENDPOINTS.EDITOR ? "nav-link active" : "nav-link"} href={PAGE_ENDPOINTS.EDITOR}>
@@ -37,13 +38,17 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <Link className={router.pathname === PAGE_ENDPOINTS.SETTINGS ? "nav-link active" : "nav-link"} href={PAGE_ENDPOINTS.SETTINGS}>
-                  <i className="ion-gear-Link"></i>&nbsp;Settings
+                  <i className="ion-gear-a"></i>&nbsp;Settings
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href={PAGE_ENDPOINTS.SETTINGS}>
+                  <img alt="user-img" style={{ width: 24, height: 24, marginRight: 4, borderRadius: "50%" }} src={"https://api.realworld.io/images/smiley-cyrus.jpeg"} />
+                  {"유저이름"}
                 </Link>
               </li>
             </>
-          )}
-
-          {!login && clientRendered && (
+          ) : (
             <>
               <li className="nav-item">
                 <Link className={router.pathname === PAGE_ENDPOINTS.AUTH.LOGIN ? "nav-link active" : "nav-link"} href={PAGE_ENDPOINTS.AUTH.LOGIN}>
