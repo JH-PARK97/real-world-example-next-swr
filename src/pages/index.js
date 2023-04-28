@@ -1,6 +1,9 @@
 import { Banner, ArticlePreview, TagList, FeedToggle } from "@/components/home";
 import { API_URL } from "@/constants/API";
 import Head from "next/head";
+import { useEffect } from "react";
+import useCurrentUser from "src/hook/useCheckLogin";
+
 import { fetcher } from "src/utills/fetcher";
 import { SWRConfig, unstable_serialize } from "swr";
 
