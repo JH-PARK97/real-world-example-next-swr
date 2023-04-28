@@ -2,21 +2,6 @@ import { ArticleAction, ArticleBanner, ArticleContainer, CommentCard, PostCommen
 import { API_URL } from "@/constants/API";
 import { fetcher } from "src/utills/fetcher";
 
-/**
- *
- * @param {import('next').GetServerSidePropsContext} context
- * @returns
- */
-export async function getServerSideProps(context) {
-  const slug = context.query.slug?.toString();
-  const articleDetail = await fetcher(`${API_URL.ARTICLE.DETAIL(slug)}`);
-  return {
-    props: {
-      articleDetail,
-    },
-  };
-}
-
 const Article = ({ articleDetail }) => {
   const { article } = articleDetail;
 
@@ -36,10 +21,10 @@ const Article = ({ articleDetail }) => {
 
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">
-              <PostCommentForm articleDetail={article} />
+              <PostCommentForm />
 
               <div className="card">
-                <CommentCard articleDetail={article} />
+                <CommentCard />
               </div>
             </div>
           </div>
@@ -50,3 +35,17 @@ const Article = ({ articleDetail }) => {
 };
 
 export default Article;
+/**
+ *
+ * @param {import('next').GetServerSidePropsContext} context
+ * @returns
+ */
+export const getServerSideProps = async (context) => {
+  const slug = context.query.slug?.toString();
+  const articleDetail = await fetcher(`${API_URL.ARTICLE.DETAIL(slug)}`);
+  return {
+    props: {
+      articleDetail,
+    },
+  };
+};

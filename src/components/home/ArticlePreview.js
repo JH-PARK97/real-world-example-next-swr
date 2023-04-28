@@ -83,6 +83,13 @@ const ArticlePreview = () => {
               <h1>{item.title}</h1>
               <p>{item.description}</p>
               <span>Read more...</span>
+              <ul className="tag-list">
+                {item.tagList.map((tag) => (
+                  <li key={tag} className="tag-default tag-pill tag-outline">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
             </Link>
           </div>
         ))}

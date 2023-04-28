@@ -1,6 +1,11 @@
 import React from "react";
+import useGetArticle from "src/hook/useGetArticle";
 
 const Settings = () => {
+  const { article, ieError, isLoading } = useGetArticle();
+
+  console.log(article);
+
   return (
     <div className="settings-page">
       <div className="container page">
