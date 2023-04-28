@@ -14,6 +14,11 @@ export const API_URL = {
 
     TAG: {
         ROOT: `${API}${API_ENDPOINTS.TAGS.ROOT}`,
+    },
+
+    AUTH: {
+        LOGIN: `${API}${API_ENDPOINTS.AUTH.LOGIN}`,
+        REGIS: `${API}${API_ENDPOINTS.AUTH.REGIS}`,
     }
 
 
