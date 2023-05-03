@@ -1,5 +1,6 @@
 import FavoriteButton from "@/components/common/FavoriteButton";
 import FollowButton from "@/components/common/FollowButton";
+import { PAGE_ENDPOINTS } from "@/constants/constant";
 import Link from "next/link";
 
 const ArticleAction = ({ articleDetail }) => {
@@ -7,11 +8,11 @@ const ArticleAction = ({ articleDetail }) => {
   const { username, image, following } = author;
   return (
     <div className="article-meta">
-      <Link href="profile.html">
+      <Link href={`${PAGE_ENDPOINTS.PROFILE}/${username}`}>
         <img src={image} />
       </Link>
       <div className="info">
-        <Link href="" className="author">
+        <Link href={`${PAGE_ENDPOINTS.PROFILE}/${username}`} className="author">
           {username}
         </Link>
         <span className="date">{new Date(updatedAt).toDateString()}</span>

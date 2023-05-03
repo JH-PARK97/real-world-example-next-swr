@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import FavoriteButton from "@/components/common/FavoriteButton";
 import FollowButton from "@/components/common/FollowButton";
+import { PAGE_ENDPOINTS } from "@/constants/constant";
 import Link from "next/link";
 
 const ArticleBanner = ({ articleDetail }) => {
@@ -12,11 +13,11 @@ const ArticleBanner = ({ articleDetail }) => {
         <h1>{title}</h1>
 
         <div className="article-meta">
-          <Link href="">
-            <img src={image} />
+          <Link href={`${PAGE_ENDPOINTS.PROFILE}/${username}`}>
+            <img src={image} alt="profile-img" />
           </Link>
           <div className="info">
-            <Link href="" className="author">
+            <Link href={`${PAGE_ENDPOINTS.PROFILE}/${username}`} className="author">
               {username}
             </Link>
             <span className="date">{new Date(updatedAt).toDateString()}</span>
