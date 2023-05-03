@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { PAGE_ENDPOINTS } from "@/constants/constant";
 import { useRouter } from "next/router";
-import { UserProfileContext } from "@/components/common/Layout";
+
 import { useContext } from "react";
+import { GlobalContext } from "src/pages/_app";
 
 const Navbar = ({ isLogin }) => {
   const [clientRendered, setClientRendered] = useState(false);
-  const userProfile = useContext(UserProfileContext);
-  useEffect(() => {
-    setClientRendered(true);
-  }, []);
-
+  const { userInfo, setUserInfo } = useContext(GlobalContext);
   const router = useRouter();
 
+  useEffect(() => {
+    setClientRendered(true);
+  }, [userInfo]);
 
   return (
     <>
@@ -46,7 +46,7 @@ const Navbar = ({ isLogin }) => {
                   <li className="nav-item">
                     <Link className="nav-link" href={PAGE_ENDPOINTS.SETTINGS}>
                       <img alt="user-img" style={{ width: 24, height: 24, marginRight: 4, borderRadius: "50%" }} src={"https://api.realworld.io/images/smiley-cyrus.jpeg"} />
-                      {userProfile?.user?.username}
+                      {userInfo?.user?.username}
                     </Link>
                   </li>
                 </>
