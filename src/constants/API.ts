@@ -19,7 +19,8 @@ export const API_URL = {
     AUTH: {
         LOGIN: `${API}${API_ENDPOINTS.AUTH.LOGIN}`,
         REGIS: `${API}${API_ENDPOINTS.AUTH.REGIS}`,
+    },
+    USER: {
+        ROOT: `${API}${API_ENDPOINTS.USER.ROOT}`
     }
-
-
 }

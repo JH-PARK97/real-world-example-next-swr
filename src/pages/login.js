@@ -7,6 +7,8 @@ import { loginSchema } from "src/validation";
 import { useForm } from "react-hook-form";
 import { API_URL } from "@/constants/API";
 import Cookies from "js-cookie";
+import { fetcher } from "src/utills/fetcher";
+import useSWR from "swr";
 
 const Login = () => {
   const router = useRouter();
@@ -35,7 +37,6 @@ const Login = () => {
         }),
       });
 
-      // const { errors, user } = await response.json();
       const { errors, user } = await response.json();
 
       if (response.status !== 200) {
@@ -46,7 +47,10 @@ const Login = () => {
         console.log("errors : ", errors);
       } else if (response.ok) {
         const token = user.token;
-        Cookies.set("jwtToken", token);
+        Cookies.set("jwtToken", token, {
+          expires: 30,
+          path: '/'
+        });
         return router.push(PAGE_ENDPOINTS.ROOT);
       }
     } catch (e) {

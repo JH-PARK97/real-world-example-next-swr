@@ -15,7 +15,7 @@ const TagList = () => {
 
   return (
     <div className="tag-list">
-      {data?.tags.map((tag) => (
+      {data?.tags?.map((tag) => (
         <button
           onClick={clickTagButton}
           style={{

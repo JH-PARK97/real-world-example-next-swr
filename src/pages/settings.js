@@ -1,11 +1,11 @@
-import React from "react";
-import useGetArticle from "src/hook/useGetArticle";
+import { UserProfileContext } from "@/components/common/Layout";
+import { useContext } from "react";
+
 
 const Settings = () => {
-  const { article, ieError, isLoading } = useGetArticle();
+  const userProfile = useContext(UserProfileContext);
 
-  console.log(article);
-
+  console.log(userProfile);
   return (
     <div className="settings-page">
       <div className="container page">
@@ -16,16 +16,16 @@ const Settings = () => {
             <form>
               <fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control" type="text" placeholder="URL of profile picture" />
+                  <input className="form-control" type="text" placeholder="URL of profile picture" defaultValue={userProfile?.user?.image} />
                 </fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control form-control-lg" type="text" placeholder="Your Name" />
+                  <input className="form-control form-control-lg" type="text" placeholder="Your Name" defaultValue={userProfile?.user?.username} />
                 </fieldset>
                 <fieldset className="form-group">
-                  <textarea className="form-control form-control-lg" rows="8" placeholder="Short bio about you"></textarea>
+                  <textarea className="form-control form-control-lg" rows="8" placeholder="Short bio about you" defaultValue={userProfile?.user?.bio}></textarea>
                 </fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control form-control-lg" type="text" placeholder="Email" />
+                  <input className="form-control form-control-lg" type="text" placeholder="Email" defaultValue={userProfile?.user?.email} />
                 </fieldset>
                 <fieldset className="form-group">
                   <input className="form-control form-control-lg" type="password" placeholder="Password" />
@@ -33,6 +33,7 @@ const Settings = () => {
                 <button className="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
               </fieldset>
             </form>
+
             <hr />
             <button className="btn btn-outline-danger">Or click here to logout.</button>
           </div>
