@@ -2,15 +2,15 @@ import { PAGE_ENDPOINTS } from "@/constants/constant";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { loginSchema } from "src/validation";
 import { useForm } from "react-hook-form";
 import { API_URL } from "@/constants/API";
 import Cookies from "js-cookie";
-import { fetcher } from "src/utills/fetcher";
-import useSWR from "swr";
+import { GlobalContext } from "src/pages/_app";
 
 const Login = () => {
+  const { setUserInfo } = useContext(GlobalContext);
   const router = useRouter();
   const {
     register,
@@ -49,8 +49,12 @@ const Login = () => {
         const token = user.token;
         Cookies.set("jwtToken", token, {
           expires: 30,
-          path: '/'
+          path: "/",
         });
+
+        setUserInfo({ user });
+
+        console.log(user);
         return router.push(PAGE_ENDPOINTS.ROOT);
       }
     } catch (e) {

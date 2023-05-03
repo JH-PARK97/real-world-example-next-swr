@@ -1,11 +1,9 @@
-import { UserProfileContext } from "@/components/common/Layout";
 import { useContext } from "react";
-
+import { GlobalContext } from "src/pages/_app";
 
 const Settings = () => {
-  const userProfile = useContext(UserProfileContext);
+  const { userInfo } = useContext(GlobalContext);
 
-  console.log(userProfile);
   return (
     <div className="settings-page">
       <div className="container page">
@@ -16,16 +14,16 @@ const Settings = () => {
             <form>
               <fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control" type="text" placeholder="URL of profile picture" defaultValue={userProfile?.user?.image} />
+                  <input className="form-control" type="text" placeholder="URL of profile picture" defaultValue={userInfo?.user?.image} />
                 </fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control form-control-lg" type="text" placeholder="Your Name" defaultValue={userProfile?.user?.username} />
+                  <input className="form-control form-control-lg" type="text" placeholder="Your Name" defaultValue={userInfo?.user?.username} />
                 </fieldset>
                 <fieldset className="form-group">
-                  <textarea className="form-control form-control-lg" rows="8" placeholder="Short bio about you" defaultValue={userProfile?.user?.bio}></textarea>
+                  <textarea className="form-control form-control-lg" rows="8" placeholder="Short bio about you" defaultValue={userInfo?.user?.bio}></textarea>
                 </fieldset>
                 <fieldset className="form-group">
-                  <input className="form-control form-control-lg" type="text" placeholder="Email" defaultValue={userProfile?.user?.email} />
+                  <input className="form-control form-control-lg" type="text" placeholder="Email" defaultValue={userInfo?.user?.email} />
                 </fieldset>
                 <fieldset className="form-group">
                   <input className="form-control form-control-lg" type="password" placeholder="Password" />
